@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price Alerts - HarvestLink</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+    <nav class="bg-white shadow-sm px-8 py-4 flex justify-between items-center">
+        <a href="farmer_dashboard.html" class="flex items-center space-x-2 text-emerald-600 font-bold text-xl">
+            <span>← Back to Dashboard</span>
+        </a>
+        <div class="bg-red-100 text-red-600 px-4 py-1 rounded-full text-sm font-bold animate-pulse">
+            Live: 2 Potential Price Crashes
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-6 py-10">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Price Monitor Table -->
+            <div class="lg:col-span-2 bg-white p-8 rounded-3xl shadow-sm">
+                <h3 class="text-2xl font-bold mb-6">Market Price Monitor</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="text-gray-400 border-b">
+                            <tr>
+                                <th class="py-4 text-left">Vegetable</th>
+                                <th class="py-4 text-center">Avg Price</th>
+                                <th class="py-4 text-center">Trend</th>
+                                <th class="py-4 text-center">Crash Alert</th>
+                            </tr>
+                        </thead>
+                        <tbody id="priceTable">
+                            <tr class="border-b">
+                                <td class="py-4 font-bold">Tomato</td>
+                                <td class="py-4 text-center">₹24/kg</td>
+                                <td class="py-4 text-center text-red-500">↑ 15%</td>
+                                <td class="py-4 text-center">
+                                    <span class="px-3 py-1 bg-red-100 text-red-600 rounded-full text-xs font-bold">High
+                                        Risk</span>
+                                </td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="py-4 font-bold">Onion</td>
+                                <td class="py-4 text-center">₹42/kg</td>
+                                <td class="py-4 text-center text-emerald-500">↓ 5%</td>
+                                <td class="py-4 text-center">
+                                    <span
+                                        class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-xs font-bold">Safe</span>
+                                </td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="py-4 font-bold">Beans</td>
+                                <td class="py-4 text-center">₹60/kg</td>
+                                <td class="py-4 text-center text-gray-400">— 0%</td>
+                                <td class="py-4 text-center">
+                                    <span
+                                        class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-xs font-bold">Safe</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Side Cards -->
+            <div class="space-y-8">
+                <!-- Crash Details -->
+                <div class="bg-red-600 text-white p-6 rounded-3xl shadow-xl">
+                    <h4 class="text-lg font-bold mb-4">CRASH ALERT: Tomato</h4>
+                    <p class="text-sm opacity-90 mb-6">Oversupply detected in Salem and Madurai markets. Prices expected
+                        to drop below ₹15 within 48 hours.</p>
+                    <div class="bg-red-700 p-4 rounded-2xl">
+                        <div class="text-xs opacity-70">Recommended Action</div>
+                        <div class="font-bold">Divert harvest to cold storage or process into puree.</div>
+                    </div>
+                </div>
+
+                <!-- Trend Chart -->
+                <div class="bg-white p-6 rounded-3xl shadow-sm h-[300px]">
+                    <h4 class="text-lg font-bold mb-4">Tomato Price Volatility</h4>
+                    <div class="h-full">
+                        <canvas id="volatilityChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/main.js"></script>
+    <script>
+        window.onload = () => {
+            updateChart('volatilityChart', 'Price (₹)', ['Oct', 'Nov', 'Dec', 'Jan'], [60, 45, 20, 25]);
+        };
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Dashboard - HarvestLink</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body class="bg-gray-100 flex min-h-screen">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white shadow-xl flex flex-col hidden md:flex">
+        <div class="p-6 flex items-center space-x-2 border-b">
+            <div class="bg-emerald-500 p-1.5 rounded-lg text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+                    </path>
+                </svg>
+            </div>
+            <span class="text-xl font-bold text-emerald-600">HarvestLink</span>
+        </div>
+        <nav class="flex-1 p-4 space-y-2">
+            <a href="farmer_dashboard.html"
+                class="flex items-center space-x-3 p-3 rounded-xl bg-emerald-50 text-emerald-600 font-semibold">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                    </path>
+                </svg>
+                <span>Dashboard</span>
+            </a>
+            <a href="crop_recommender.html"
+                class="flex items-center space-x-3 p-3 rounded-xl text-gray-500 hover:bg-emerald-50 hover:text-emerald-600 transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                    </path>
+                </svg>
+                <span>Crop AI</span>
+            </a>
+            <a href="price_alert.html"
+                class="flex items-center space-x-3 p-3 rounded-xl text-gray-500 hover:bg-emerald-50 hover:text-emerald-600 transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                    </path>
+                </svg>
+                <span>Price Alerts</span>
+            </a>
+        </nav>
+        <div class="p-4 border-t">
+            <button onclick="logout()"
+                class="w-full flex items-center space-x-3 p-3 rounded-xl text-red-500 hover:bg-red-50 transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
+                    </path>
+                </svg>
+                <span>Logout</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-y-auto">
+        <header class="bg-white p-6 shadow-sm flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-bold">Welcome, <span id="farmerName" class="text-emerald-500">Karthik</span>!
+                </h1>
+                <p class="text-gray-500">District: <span id="farmerDistrict">Salem</span></p>
+            </div>
+            <div id="weatherWidget" class="flex items-center bg-gray-50 px-4 py-2 rounded-xl border">
+                <div class="mr-3">
+                    <div class="text-sm font-semibold">Salem Weather</div>
+                    <div class="text-xs text-gray-500">Sunny</div>
+                </div>
+                <div class="text-2xl font-bold text-emerald-600">32°C</div>
+            </div>
+        </header>
+
+        <div class="p-8 space-y-8 animate-fadeIn">
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <!-- Stat 1 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border-b-4 border-emerald-500">
+                    <div class="text-gray-500 text-sm font-semibold mb-1">Recommended Crop</div>
+                    <div class="text-2xl font-bold">Tomato</div>
+                    <div class="text-xs text-green-500 mt-2">94% Confidence</div>
+                </div>
+                <!-- Stat 2 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border-b-4 border-blue-500">
+                    <div class="text-gray-500 text-sm font-semibold mb-1">Estimated Demand</div>
+                    <div class="text-2xl font-bold">850 kg</div>
+                    <div class="text-xs text-blue-500 mt-2">↑ 12% from last wk</div>
+                </div>
+                <!-- Stat 3 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border-b-4 border-red-500">
+                    <div class="text-gray-500 text-sm font-semibold mb-1">Price Alert</div>
+                    <div class="text-2xl font-bold">Moderate</div>
+                    <div class="text-xs text-red-500 mt-2">Possible dip in Oct</div>
+                </div>
+                <!-- Stat 4 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border-b-4 border-orange-500">
+                    <div class="text-gray-500 text-sm font-semibold mb-1">Market Price</div>
+                    <div class="text-2xl font-bold">₹45/kg</div>
+                    <div class="text-xs text-green-500 mt-2">Trending Up</div>
+                </div>
+            </div>
+
+            <!-- Charts and Tables -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Activity Table -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm">
+                    <h3 class="text-xl font-bold mb-6">Recent Prediction History</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead class="text-gray-400 font-semibold border-b">
+                                <tr>
+                                    <th class="py-3">Date</th>
+                                    <th class="py-3">Recommended</th>
+                                    <th class="py-3">Confidence</th>
+                                    <th class="py-3">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="predictionHistory" class="text-gray-600">
+                                <tr class="border-b">
+                                    <td class="py-4">Aug 24, 2024</td>
+                                    <td class="py-4 font-semibold text-emerald-600">Tomato</td>
+                                    <td class="py-4">94%</td>
+                                    <td class="py-4"><button class="text-blue-500 hover:underline">View</button></td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="py-4">Aug 10, 2024</td>
+                                    <td class="py-4 font-semibold text-emerald-600">Onion</td>
+                                    <td class="py-4">88%</td>
+                                    <td class="py-4"><button class="text-blue-500 hover:underline">View</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Price Trend chart -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm h-[400px]">
+                    <h3 class="text-xl font-bold mb-6">Tomato Price Trend (₹/kg)</h3>
+                    <div class="h-full">
+                        <canvas id="priceTrendChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="assets/main.js"></script>
+    <script>
+        // Initialize dashboard
+        window.onload = () => {
+            updateChart('priceTrendChart', 'Market Price', ['Week 1', 'Week 2', 'Week 3', 'Week 4'], [38, 42, 45, 43]);
+        };
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+
+</html>

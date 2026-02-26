@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HarvestLink - Smart Farming with AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body class="bg-gray-50 text-gray-900">
+    <!-- Navbar -->
+    <nav class="glass sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+            <div class="bg-emerald-500 p-2 rounded-lg">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+                    </path>
+                </svg>
+            </div>
+            <span class="text-2xl font-bold text-emerald-600">HarvestLink</span>
+        </div>
+        <div class="hidden md:flex space-x-8 font-semibold">
+            <a href="#features" class="hover:text-emerald-500 transition">Features</a>
+            <a href="#stats" class="hover:text-emerald-500 transition">Impact</a>
+            <a href="farmer_dashboard.html"
+                class="px-5 py-2 rounded-full border-2 border-emerald-500 text-emerald-500 hover:bg-emerald-500 hover:text-white transition">Farmer
+                Login</a>
+            <a href="shop_dashboard.html"
+                class="px-5 py-2 rounded-full bg-emerald-500 text-white hover:bg-emerald-600 transition">Shop Login</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-[80vh] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&q=80"
+                class="w-full h-full object-cover opacity-20" alt="Green field">
+            <div class="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white"></div>
+        </div>
+
+        <div class="container mx-auto px-6 text-center z-10 animate-fadeIn">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                Empowering <span class="text-emerald-500">Tamil Nadu Farmers</span> <br> with Smart AI
+            </h1>
+            <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
+                Connect directly with shops, predict crop demand, and prevent food wastage using our advanced ML
+                prediction engine.
+            </p>
+            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
+                <a href="farmer_dashboard.html"
+                    class="px-10 py-4 bg-emerald-500 text-white rounded-xl shadow-lg hover:bg-emerald-600 transition text-lg font-bold">Start
+                    Farming Smarter</a>
+                <a href="#features"
+                    class="px-10 py-4 glass border-emerald-500 border-2 text-emerald-600 rounded-xl hover:bg-emerald-50 transition text-lg font-bold">Explore
+                    Features</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Our AI Solutions</h2>
+                <div class="w-20 h-1 bg-emerald-500 mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Card 1 -->
+                <div class="p-8 rounded-2xl bg-gray-50 hover:shadow-xl transition group">
+                    <div
+                        class="bg-emerald-100 p-4 rounded-xl w-fit mb-6 group-hover:bg-emerald-500 group-hover:text-white transition">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Crop AI</h3>
+                    <p class="text-gray-600">Personalized crop recommendations based on soil, weather, and market
+                        demand.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="p-8 rounded-2xl bg-gray-50 hover:shadow-xl transition group">
+                    <div
+                        class="bg-blue-100 p-4 rounded-xl w-fit mb-6 group-hover:bg-blue-500 group-hover:text-white transition">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Demand Forecast</h3>
+                    <p class="text-gray-600">Accurate prediction of vegetable demand and prices to optimize production.
+                    </p>
+                </div>
+                <!-- Card 3 -->
+                <div class="p-8 rounded-2xl bg-gray-50 hover:shadow-xl transition group">
+                    <div
+                        class="bg-red-100 p-4 rounded-xl w-fit mb-6 group-hover:bg-red-500 group-hover:text-white transition">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Price Alert</h3>
+                    <p class="text-gray-600">Early warning system for price crashes, helping farmers pivot quickly.</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="p-8 rounded-2xl bg-gray-50 hover:shadow-xl transition group">
+                    <div
+                        class="bg-orange-100 p-4 rounded-xl w-fit mb-6 group-hover:bg-orange-500 group-hover:text-white transition">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Anti-Waste</h3>
+                    <p class="text-gray-600">Smart spoilage risk scoring and circular economy suggestions for excess
+                        produce.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="stats" class="py-20 bg-emerald-600 text-white">
+        <div class="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div>
+                <div class="text-5xl font-bold mb-2">5,000+</div>
+                <div class="text-emerald-100">Farmers Helped</div>
+            </div>
+            <div>
+                <div class="text-5xl font-bold mb-2">30%</div>
+                <div class="text-emerald-100">Wastage Reduced</div>
+            </div>
+            <div>
+                <div class="text-5xl font-bold mb-2">94%</div>
+                <div class="text-emerald-100">Model Accuracy</div>
+            </div>
+            <div>
+                <div class="text-5xl font-bold mb-2">10+</div>
+                <div class="text-emerald-100">TN Districts</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-gray-900 text-gray-400">
+        <div class="container mx-auto px-6 text-center">
+            <div class="flex items-center justify-center space-x-2 mb-6">
+                <div class="bg-emerald-500 p-2 rounded-lg">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+                        </path>
+                    </svg>
+                </div>
+                <span class="text-xl font-bold text-white">HarvestLink</span>
+            </div>
+            <p>&copy; 2024 HarvestLink Tamil Nadu. Built with AI for sustainable farming.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

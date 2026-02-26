@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop AI Recommender - HarvestLink</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+    <nav class="bg-white shadow-sm px-8 py-4 flex justify-between items-center">
+        <a href="farmer_dashboard.html" class="flex items-center space-x-2 text-emerald-600 font-bold text-xl">
+            <span>← Back to Dashboard</span>
+        </a>
+        <span class="text-gray-400 font-semibold">Step 1: Input Land Details</span>
+    </nav>
+
+    <div class="container mx-auto px-6 py-10">
+        <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
+            <!-- Form Card -->
+            <div class="bg-white p-8 rounded-3xl shadow-xl animate-fadeIn">
+                <h2 class="text-2xl font-bold mb-6">Crop Assessment Form</h2>
+                <form id="recommendationForm" class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-600 mb-1">District</label>
+                            <select id="district" class="w-full p-3 bg-gray-50 border rounded-xl outline-emerald-500">
+                                <option>Salem</option>
+                                <option>Coimbatore</option>
+                                <option>Madurai</option>
+                                <option>Chennai</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-600 mb-1">Land Area (Acres)</label>
+                            <input type="number" id="land_area" value="2"
+                                class="w-full p-3 bg-gray-50 border rounded-xl outline-emerald-500">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-600 mb-1">Soil Type</label>
+                            <select id="soil_type" class="w-full p-3 bg-gray-50 border rounded-xl outline-emerald-500">
+                                <option>Black Soil</option>
+                                <option>Red Soil</option>
+                                <option>Clay</option>
+                                <option>Sandy</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-600 mb-1">Water Availability</label>
+                            <select id="water_availability"
+                                class="w-full p-3 bg-gray-50 border rounded-xl outline-emerald-500">
+                                <option>High</option>
+                                <option>Medium</option>
+                                <option>Low</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-600 mb-1">Previous Crop</label>
+                            <select id="previous_crop"
+                                class="w-full p-3 bg-gray-50 border rounded-xl outline-emerald-500">
+                                <option>Rice</option>
+                                <option>Corn</option>
+                                <option>None</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-600 mb-1">Current Season</label>
+                            <select id="season" class="w-full p-3 bg-gray-50 border rounded-xl outline-emerald-500">
+                                <option>Summer</option>
+                                <option>Winter</option>
+                                <option>Monsoon</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit"
+                        class="w-full py-4 bg-emerald-500 text-white rounded-2xl font-bold text-lg hover:bg-emerald-600 shadow-lg shadow-emerald-200 transition mt-6">
+                        Get AI Recommendation
+                    </button>
+                    <p class="text-center text-xs text-gray-400 mt-4">API will auto-fill weather data for your district
+                    </p>
+                </form>
+            </div>
+
+            <!-- Result Card -->
+            <div id="resultContainer"
+                class="hidden bg-emerald-600 text-white p-8 rounded-3xl shadow-xl flex flex-col justify-between animate-fadeIn">
+                <div>
+                    <h3 class="text-xl font-semibold mb-2 opacity-80">Top Recommendation</h3>
+                    <div class="text-5xl font-bold mb-6" id="resultCrop">Tomato</div>
+
+                    <div class="mb-8">
+                        <div class="flex justify-between text-sm mb-1">
+                            <span>Confidence Score</span>
+                            <span id="resultConf">94%</span>
+                        </div>
+                        <div class="w-full bg-emerald-800 rounded-full h-2.5">
+                            <div id="confBar" class="bg-white h-2.5 rounded-full" style="width: 94%"></div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-3 p-4 bg-emerald-500 rounded-2xl bg-opacity-30">
+                            <div class="text-2xl">💰</div>
+                            <div>
+                                <div class="text-sm opacity-80">Expected Profit</div>
+                                <div class="font-bold">₹45,000 / Acre</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3 p-4 bg-emerald-500 rounded-2xl bg-opacity-30">
+                            <div class="text-2xl">📊</div>
+                            <div>
+                                <div class="text-sm opacity-80">Market Demand</div>
+                                <div class="font-bold">Very High (Pongal Spike)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-10 p-4 border-t border-emerald-500 border-opacity-30">
+                    <p class="text-sm italic" id="tamilSummary">"உங்கள் நிலத்திற்கு தக்காளி சிறந்தது"</p>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyState"
+                class="bg-white p-8 rounded-3xl shadow-xl flex flex-col items-center justify-center text-center opacity-50">
+                <svg class="w-20 h-20 text-gray-300 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z">
+                    </path>
+                </svg>
+                <h3 class="text-xl font-bold">Waiting for details...</h3>
+                <p class="text-gray-500">Our AI needs your land info to make a prediction.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/main.js"></script>
+    <script>
+        document.getElementById('recommendationForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const formData = {
+                district: document.getElementById('district').value,
+                land_area: parseFloat(document.getElementById('land_area').value),
+                soil_type: document.getElementById('soil_type').value,
+                water_availability: document.getElementById('water_availability').value,
+                previous_crop: document.getElementById('previous_crop').value,
+                season: document.getElementById('season').value
+            };
+
+            try {
+                // For demo, we use the /predict/smart endpoint to get everything at once
+                const res = await getSmartPrediction(formData);
+
+                document.getElementById('emptyState').classList.add('hidden');
+                document.getElementById('resultContainer').classList.remove('hidden');
+
+                document.getElementById('resultCrop').innerText = res.recommended_crop;
+                document.getElementById('resultConf').innerText = (res.confidence_scores.crop * 100).toFixed(0) + '%';
+                document.getElementById('confBar').style.width = (res.confidence_scores.crop * 100) + '%';
+                document.getElementById('tamilSummary').innerText = res.tamil_summary;
+
+                showToast('Prediction successfully generated!');
+            } catch (err) {
+                console.error(err);
+            }
+        };
+    </script>
+</body>
+
+</html>
